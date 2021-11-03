@@ -1,37 +1,16 @@
 <?php
-public function __construct() {
-    echo "Web MVC Siap Dijalankan!";
-  }
-
-public function __construct() {
-    $url = $this->parseURL();
-    var_dump($url);
-    }
-public function parseURL() {
-    if(isset($_GET[‘url’])) {
-    $url = $_GET[‘url’];return $url;
-    }
-    }
-public function parseURL() {
-    if(isset($_GET[‘url’])) {
-     $url = rtrim($_GET[‘url’],”/”);
-    $url = filter_var($url, FILTER_SANITIZE_URL);
-    $url = explode(‘/’, $url);
-    return $url;
-    }
-    }
 
 class App {
-  protected $controller = “Home”;
-  protected $method = “index”;
-  protected $params = [];….
+  protected $controller = "Home";
+  protected $method = "index";
+  protected $params = [];
 
 //setup controller
-if(file_exists(‘../app/controllers/’. $url[0].’.php’)) {
+if(file_exists("../app/controllers/". $url[0].'.php')) {
   $this->controller = $url[0];
   unset($url[0]);
 }
-require_once ‘../app/controllers/’. $this->controller.’.php’;
+require_once "../app/controllers/". $this->controller.'.php';
 $this->controller = new $this->controller;
 
 if(isset($url[1])) {
@@ -45,4 +24,26 @@ if(!empty($url)) {
 }
 
 call_user_func_array([$this->controller, $this->method], $this->params);
+
+public function __construct() {
+  echo "Web MVC Siap Dijalankan!";
+}
+public function __construct() {
+  $url = $this->parseURL();
+  var_dump($url);
+  }
+public function parseURL() {
+  if(isset($_GET[‘url’])) {
+  $url = $_GET[‘url’];return $url;
+  }
+  }
+public function parseURL() {
+  if(isset($_GET['url'])) {
+   $url = rtrim($_GET['url'],"/");
+  $url = filter_var($url, FILTER_SANITIZE_URL);
+  $url = explode('/', $url);
+  return $url;
+  }
+  }
+
 ?>
